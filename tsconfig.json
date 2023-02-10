@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "paths": {
+      "payload/generated-types": ["./src/payload-types.ts"]
+    },
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -13,10 +16,12 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "jsx": "react"
+    "jsx": "react",
   },
   "include": [
-    "src"
+    "src",
+    "src/payload.config.ts",
+    "src/scripts/migrateVersions.ts"
   ],
   "exclude": [
     "node_modules",
