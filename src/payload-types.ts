@@ -455,16 +455,20 @@ export interface Page {
           leadingHeader: {
             [k: string]: unknown;
           }[];
-          sliderType: 'quoteSlider' | 'imageSlider';
+          sliderType: 'questionSet' | 'imageSlider';
           imageSlides: {
             image: string | Media;
             id?: string;
           }[];
-          quoteSlides: {
-            richText: {
+          'Question set': {
+            question: {
               [k: string]: unknown;
             }[];
-            quoteDate: string;
+            prerequisite?: 'na';
+            answers: {
+              answer?: string;
+              id?: string;
+            }[];
             id?: string;
           }[];
         };
@@ -1095,29 +1099,6 @@ export interface CaseStudy {
         id?: string;
         blockName?: string;
         blockType: 'reusableContentBlock';
-      }
-    | {
-        sliderFields: {
-          useLeadingHeader?: boolean;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
-          sliderType: 'quoteSlider' | 'imageSlider';
-          imageSlides: {
-            image: string | Media;
-            id?: string;
-          }[];
-          quoteSlides: {
-            richText: {
-              [k: string]: unknown;
-            }[];
-            quoteDate: string;
-            id?: string;
-          }[];
-        };
-        id?: string;
-        blockName?: string;
-        blockType: 'slider';
       }
     | {
         stepsFields: {
@@ -1793,29 +1774,6 @@ export interface ReusableContent {
         blockType: 'mediaContent';
       }
     | {
-        sliderFields: {
-          useLeadingHeader?: boolean;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
-          sliderType: 'quoteSlider' | 'imageSlider';
-          imageSlides: {
-            image: string | Media;
-            id?: string;
-          }[];
-          quoteSlides: {
-            richText: {
-              [k: string]: unknown;
-            }[];
-            quoteDate: string;
-            id?: string;
-          }[];
-        };
-        id?: string;
-        blockName?: string;
-        blockType: 'slider';
-      }
-    | {
         stepsFields: {
           steps: {
             layout: (
@@ -2024,6 +1982,19 @@ export interface MainMenu {
     };
     id?: string;
   }[];
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "question-set".
+ */
+export interface QuestionSet {
+  id: string;
+  cards: {
+    question: string | Media;
+    id?: string;
+  }[];
+  createdAt: string;
+  updatedAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

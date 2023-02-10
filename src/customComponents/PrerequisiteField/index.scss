@@ -1,0 +1,17 @@
+.select-wrapper {
+  background: #222222;
+  width: 100%;
+  padding: 1rem;
+  .select-label {
+    font: 'Suisse Intl';
+    font-size: '13px';
+    line-height: '25px';
+  }
+  .select{
+    width: 100%;
+    box-shadow: 0 2px 3px 0 rgb(0 2 4 / 13%), 0 6px 4px -4px rgb(0 2 4 / 10%);
+    padding: 1rem;
+    background: rgb(34 34 34);
+    border-color: #3c3c3c;
+  }
+}

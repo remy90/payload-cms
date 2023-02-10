@@ -1,3 +1,4 @@
+import { PrerequisiteField } from './fields/prerequisite/prerequisiteSelect';
 import { buildConfig } from 'payload/config';
 import path from 'path';
 import nestedDocs from '@payloadcms/plugin-nested-docs';
@@ -12,10 +13,12 @@ import { MainMenu } from './globals/MainMenu';
 import { Posts } from './collections/Posts';
 import { Media } from './collections/Media';
 import richText from './fields/richText';
+import { QuestionSets } from './collections/QuestionSets';
 
 export default buildConfig({
   collections: [
     CaseStudies,
+    QuestionSets,
     Media,
     Pages,
     Posts,
@@ -62,9 +65,10 @@ export default buildConfig({
   ],
   cors: [
     process.env.PAYLOAD_PUBLIC_APP_URL,
-    'https://payloadcms.com',
+    // 'https://payloadcms.com',
   ].filter(Boolean),
   admin: {
+
     webpack: (config) => ({
       ...config,
       resolve: {
