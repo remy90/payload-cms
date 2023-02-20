@@ -297,7 +297,7 @@ input CaseStudy_FeaturedImage_where_and {
   id: CaseStudy_FeaturedImage_id_operator
 }
 
-union CaseStudy_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | ReusableContentBlock | Steps | StickyHighlights
+union CaseStudy_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | ReusableContentBlock | Slider | Steps | StickyHighlights
 
 type Cta {
   ctaFields: Cta_CtaFields
@@ -1936,7 +1936,152 @@ type ReusableContent {
   layout: [ReusableContent_Layout!]!
 }
 
-union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | Code | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Steps | StickyHighlights
+union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | Code | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Slider | Steps | StickyHighlights
+
+type Slider {
+  sliderFields: Slider_SliderFields
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type Slider_SliderFields {
+  useLeadingHeader: Boolean
+  leadingHeader(depth: Int): JSON
+  sliderType: Slider_SliderFields_sliderType
+  imageSlides: [Slider_SliderFields_ImageSlides!]
+  quoteSlides: [Slider_SliderFields_QuoteSlides!]
+}
+
+enum Slider_SliderFields_sliderType {
+  quoteSlider
+  imageSlider
+}
+
+type Slider_SliderFields_ImageSlides {
+  image(where: Slider_SliderFields_ImageSlides_Image_where): Media
+  id: String
+}
+
+input Slider_SliderFields_ImageSlides_Image_where {
+  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
+  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
+  url: Slider_SliderFields_ImageSlides_Image_url_operator
+  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
+  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
+  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
+  width: Slider_SliderFields_ImageSlides_Image_width_operator
+  height: Slider_SliderFields_ImageSlides_Image_height_operator
+  id: Slider_SliderFields_ImageSlides_Image_id_operator
+  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
+  AND: [Slider_SliderFields_ImageSlides_Image_where_and]
+}
+
+input Slider_SliderFields_ImageSlides_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+}
+
+input Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_id_operator {
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
+  exists: Boolean
+}
+
+input Slider_SliderFields_ImageSlides_Image_where_or {
+  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
+  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
+  url: Slider_SliderFields_ImageSlides_Image_url_operator
+  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
+  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
+  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
+  width: Slider_SliderFields_ImageSlides_Image_width_operator
+  height: Slider_SliderFields_ImageSlides_Image_height_operator
+  id: Slider_SliderFields_ImageSlides_Image_id_operator
+}
+
+input Slider_SliderFields_ImageSlides_Image_where_and {
+  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
+  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
+  url: Slider_SliderFields_ImageSlides_Image_url_operator
+  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
+  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
+  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
+  width: Slider_SliderFields_ImageSlides_Image_width_operator
+  height: Slider_SliderFields_ImageSlides_Image_height_operator
+  id: Slider_SliderFields_ImageSlides_Image_id_operator
+}
+
+type Slider_SliderFields_QuoteSlides {
+  richText(depth: Int): JSON
+  quoteDate: DateTime
+  id: String
+}
 
 type Steps {
   stepsFields: Steps_StepsFields
@@ -2120,161 +2265,6 @@ input StickyHighlights_StickyHighlightsFields_Highlights_Media_where_and {
   width: StickyHighlights_StickyHighlightsFields_Highlights_Media_width_operator
   height: StickyHighlights_StickyHighlightsFields_Highlights_Media_height_operator
   id: StickyHighlights_StickyHighlightsFields_Highlights_Media_id_operator
-}
-
-type Slider {
-  sliderFields: Slider_SliderFields
-  id: String
-  blockName: String
-  blockType: String
-}
-
-type Slider_SliderFields {
-  useLeadingHeader: Boolean
-  leadingHeader(depth: Int): JSON
-  sliderType: Slider_SliderFields_sliderType
-  imageSlides: [Slider_SliderFields_ImageSlides!]
-  Question set: [Slider_SliderFields_QuestionSet!]
-}
-
-enum Slider_SliderFields_sliderType {
-  questionSet
-  imageSlider
-}
-
-type Slider_SliderFields_ImageSlides {
-  image(where: Slider_SliderFields_ImageSlides_Image_where): Media
-  id: String
-}
-
-input Slider_SliderFields_ImageSlides_Image_where {
-  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
-  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
-  url: Slider_SliderFields_ImageSlides_Image_url_operator
-  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
-  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
-  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
-  width: Slider_SliderFields_ImageSlides_Image_width_operator
-  height: Slider_SliderFields_ImageSlides_Image_height_operator
-  id: Slider_SliderFields_ImageSlides_Image_id_operator
-  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
-  AND: [Slider_SliderFields_ImageSlides_Image_where_and]
-}
-
-input Slider_SliderFields_ImageSlides_Image_alt_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-}
-
-input Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator {
-  equals: String
-  not_equals: String
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_url_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_filename_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_mimeType_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_filesize_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_width_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_height_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_id_operator {
-  equals: JSON
-  not_equals: JSON
-  in: [JSON]
-  not_in: [JSON]
-  all: [JSON]
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_where_or {
-  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
-  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
-  url: Slider_SliderFields_ImageSlides_Image_url_operator
-  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
-  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
-  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
-  width: Slider_SliderFields_ImageSlides_Image_width_operator
-  height: Slider_SliderFields_ImageSlides_Image_height_operator
-  id: Slider_SliderFields_ImageSlides_Image_id_operator
-}
-
-input Slider_SliderFields_ImageSlides_Image_where_and {
-  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
-  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
-  url: Slider_SliderFields_ImageSlides_Image_url_operator
-  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
-  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
-  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
-  width: Slider_SliderFields_ImageSlides_Image_width_operator
-  height: Slider_SliderFields_ImageSlides_Image_height_operator
-  id: Slider_SliderFields_ImageSlides_Image_id_operator
-}
-
-type Slider_SliderFields_QuestionSet {
-  question(depth: Int): JSON
-  prerequisite: Slider_SliderFields_QuestionSet_prerequisite
-  answers: [Slider_SliderFields_QuestionSet_Answers!]!
-  id: String
-}
-
-enum Slider_SliderFields_QuestionSet_prerequisite {
-  na
-}
-
-type Slider_SliderFields_QuestionSet_Answers {
-  answer: String
-  id: String
 }
 
 type Page_Meta {
@@ -2830,7 +2820,7 @@ input CaseStudyVersion_Version_FeaturedImage_where_and {
   id: CaseStudyVersion_Version_FeaturedImage_id_operator
 }
 
-union CaseStudyVersion_Version_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | ReusableContentBlock | Steps | StickyHighlights
+union CaseStudyVersion_Version_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | ReusableContentBlock | Slider | Steps | StickyHighlights
 
 type CaseStudyVersion_Version_Meta {
   title: String
@@ -3136,11 +3126,23 @@ type QuestionSet {
   id: String
   createdAt: DateTime!
   updatedAt: DateTime!
-  cards: [QuestionSet_Cards!]
+  QuestionSetTitle: String
+  questionSet: QuestionSet_QuestionSet
 }
 
-type QuestionSet_Cards {
-  question: Media
+type QuestionSet_QuestionSet {
+  questionSet: [QuestionSet_QuestionSet_QuestionSet!]
+}
+
+type QuestionSet_QuestionSet_QuestionSet {
+  question: String
+  answers: [QuestionSet_QuestionSet_QuestionSet_Answers!]!
+  prerequisite: String
+  id: String
+}
+
+type QuestionSet_QuestionSet_QuestionSet_Answers {
+  answer: String
   id: String
 }
 
@@ -3159,8 +3161,12 @@ type QuestionSets {
 }
 
 input QuestionSet_where {
-  cards__question: QuestionSet_cards__question_operator
-  cards__id: QuestionSet_cards__id_operator
+  QuestionSetTitle: QuestionSet_QuestionSetTitle_operator
+  questionSet__questionSet__question: QuestionSet_questionSet__questionSet__question_operator
+  questionSet__questionSet__answers__answer: QuestionSet_questionSet__questionSet__answers__answer_operator
+  questionSet__questionSet__answers__id: QuestionSet_questionSet__questionSet__answers__id_operator
+  questionSet__questionSet__prerequisite: QuestionSet_questionSet__questionSet__prerequisite_operator
+  questionSet__questionSet__id: QuestionSet_questionSet__questionSet__id_operator
   id: QuestionSet_id_operator
   createdAt: QuestionSet_createdAt_operator
   updatedAt: QuestionSet_updatedAt_operator
@@ -3168,15 +3174,46 @@ input QuestionSet_where {
   AND: [QuestionSet_where_and]
 }
 
-input QuestionSet_cards__question_operator {
+input QuestionSet_QuestionSetTitle_operator {
   equals: String
   not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  like: String
+  contains: String
+  exists: Boolean
 }
 
-input QuestionSet_cards__id_operator {
+input QuestionSet_questionSet__questionSet__question_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+}
+
+input QuestionSet_questionSet__questionSet__answers__answer_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input QuestionSet_questionSet__questionSet__answers__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input QuestionSet_questionSet__questionSet__prerequisite_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  exists: Boolean
+}
+
+input QuestionSet_questionSet__questionSet__id_operator {
   equals: String
   not_equals: String
   like: String
@@ -3216,16 +3253,24 @@ input QuestionSet_updatedAt_operator {
 }
 
 input QuestionSet_where_or {
-  cards__question: QuestionSet_cards__question_operator
-  cards__id: QuestionSet_cards__id_operator
+  QuestionSetTitle: QuestionSet_QuestionSetTitle_operator
+  questionSet__questionSet__question: QuestionSet_questionSet__questionSet__question_operator
+  questionSet__questionSet__answers__answer: QuestionSet_questionSet__questionSet__answers__answer_operator
+  questionSet__questionSet__answers__id: QuestionSet_questionSet__questionSet__answers__id_operator
+  questionSet__questionSet__prerequisite: QuestionSet_questionSet__questionSet__prerequisite_operator
+  questionSet__questionSet__id: QuestionSet_questionSet__questionSet__id_operator
   id: QuestionSet_id_operator
   createdAt: QuestionSet_createdAt_operator
   updatedAt: QuestionSet_updatedAt_operator
 }
 
 input QuestionSet_where_and {
-  cards__question: QuestionSet_cards__question_operator
-  cards__id: QuestionSet_cards__id_operator
+  QuestionSetTitle: QuestionSet_QuestionSetTitle_operator
+  questionSet__questionSet__question: QuestionSet_questionSet__questionSet__question_operator
+  questionSet__questionSet__answers__answer: QuestionSet_questionSet__questionSet__answers__answer_operator
+  questionSet__questionSet__answers__id: QuestionSet_questionSet__questionSet__answers__id_operator
+  questionSet__questionSet__prerequisite: QuestionSet_questionSet__questionSet__prerequisite_operator
+  questionSet__questionSet__id: QuestionSet_questionSet__questionSet__id_operator
   id: QuestionSet_id_operator
   createdAt: QuestionSet_createdAt_operator
   updatedAt: QuestionSet_updatedAt_operator
@@ -6230,81 +6275,233 @@ type question_setAccess {
 }
 
 type QuestionSetFields {
-  cards: QuestionSetFields_cards
+  QuestionSetTitle: QuestionSetFields_QuestionSetTitle
+  questionSet: QuestionSetFields_questionSet
 }
 
-type QuestionSetFields_cards {
-  create: QuestionSetFields_cards_Create
-  read: QuestionSetFields_cards_Read
-  update: QuestionSetFields_cards_Update
-  delete: QuestionSetFields_cards_Delete
-  fields: QuestionSetFields_cards_Fields
+type QuestionSetFields_QuestionSetTitle {
+  create: QuestionSetFields_QuestionSetTitle_Create
+  read: QuestionSetFields_QuestionSetTitle_Read
+  update: QuestionSetFields_QuestionSetTitle_Update
+  delete: QuestionSetFields_QuestionSetTitle_Delete
 }
 
-type QuestionSetFields_cards_Create {
+type QuestionSetFields_QuestionSetTitle_Create {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_Read {
+type QuestionSetFields_QuestionSetTitle_Read {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_Update {
+type QuestionSetFields_QuestionSetTitle_Update {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_Delete {
+type QuestionSetFields_QuestionSetTitle_Delete {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_Fields {
-  question: QuestionSetFields_cards_question
-  id: QuestionSetFields_cards_id
+type QuestionSetFields_questionSet {
+  create: QuestionSetFields_questionSet_Create
+  read: QuestionSetFields_questionSet_Read
+  update: QuestionSetFields_questionSet_Update
+  delete: QuestionSetFields_questionSet_Delete
+  fields: QuestionSetFields_questionSet_Fields
 }
 
-type QuestionSetFields_cards_question {
-  create: QuestionSetFields_cards_question_Create
-  read: QuestionSetFields_cards_question_Read
-  update: QuestionSetFields_cards_question_Update
-  delete: QuestionSetFields_cards_question_Delete
-}
-
-type QuestionSetFields_cards_question_Create {
+type QuestionSetFields_questionSet_Create {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_question_Read {
+type QuestionSetFields_questionSet_Read {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_question_Update {
+type QuestionSetFields_questionSet_Update {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_question_Delete {
+type QuestionSetFields_questionSet_Delete {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_id {
-  create: QuestionSetFields_cards_id_Create
-  read: QuestionSetFields_cards_id_Read
-  update: QuestionSetFields_cards_id_Update
-  delete: QuestionSetFields_cards_id_Delete
+type QuestionSetFields_questionSet_Fields {
+  questionSet: QuestionSetFields_questionSet_questionSet
 }
 
-type QuestionSetFields_cards_id_Create {
+type QuestionSetFields_questionSet_questionSet {
+  create: QuestionSetFields_questionSet_questionSet_Create
+  read: QuestionSetFields_questionSet_questionSet_Read
+  update: QuestionSetFields_questionSet_questionSet_Update
+  delete: QuestionSetFields_questionSet_questionSet_Delete
+  fields: QuestionSetFields_questionSet_questionSet_Fields
+}
+
+type QuestionSetFields_questionSet_questionSet_Create {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_id_Read {
+type QuestionSetFields_questionSet_questionSet_Read {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_id_Update {
+type QuestionSetFields_questionSet_questionSet_Update {
   permission: Boolean!
 }
 
-type QuestionSetFields_cards_id_Delete {
+type QuestionSetFields_questionSet_questionSet_Delete {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_Fields {
+  question: QuestionSetFields_questionSet_questionSet_question
+  answers: QuestionSetFields_questionSet_questionSet_answers
+  prerequisite: QuestionSetFields_questionSet_questionSet_prerequisite
+  id: QuestionSetFields_questionSet_questionSet_id
+}
+
+type QuestionSetFields_questionSet_questionSet_question {
+  create: QuestionSetFields_questionSet_questionSet_question_Create
+  read: QuestionSetFields_questionSet_questionSet_question_Read
+  update: QuestionSetFields_questionSet_questionSet_question_Update
+  delete: QuestionSetFields_questionSet_questionSet_question_Delete
+}
+
+type QuestionSetFields_questionSet_questionSet_question_Create {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_question_Read {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_question_Update {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_question_Delete {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers {
+  create: QuestionSetFields_questionSet_questionSet_answers_Create
+  read: QuestionSetFields_questionSet_questionSet_answers_Read
+  update: QuestionSetFields_questionSet_questionSet_answers_Update
+  delete: QuestionSetFields_questionSet_questionSet_answers_Delete
+  fields: QuestionSetFields_questionSet_questionSet_answers_Fields
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_Create {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_Read {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_Update {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_Delete {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_Fields {
+  answer: QuestionSetFields_questionSet_questionSet_answers_answer
+  id: QuestionSetFields_questionSet_questionSet_answers_id
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_answer {
+  create: QuestionSetFields_questionSet_questionSet_answers_answer_Create
+  read: QuestionSetFields_questionSet_questionSet_answers_answer_Read
+  update: QuestionSetFields_questionSet_questionSet_answers_answer_Update
+  delete: QuestionSetFields_questionSet_questionSet_answers_answer_Delete
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_answer_Create {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_answer_Read {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_answer_Update {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_answer_Delete {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_id {
+  create: QuestionSetFields_questionSet_questionSet_answers_id_Create
+  read: QuestionSetFields_questionSet_questionSet_answers_id_Read
+  update: QuestionSetFields_questionSet_questionSet_answers_id_Update
+  delete: QuestionSetFields_questionSet_questionSet_answers_id_Delete
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_id_Create {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_id_Read {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_id_Update {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_answers_id_Delete {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_prerequisite {
+  create: QuestionSetFields_questionSet_questionSet_prerequisite_Create
+  read: QuestionSetFields_questionSet_questionSet_prerequisite_Read
+  update: QuestionSetFields_questionSet_questionSet_prerequisite_Update
+  delete: QuestionSetFields_questionSet_questionSet_prerequisite_Delete
+}
+
+type QuestionSetFields_questionSet_questionSet_prerequisite_Create {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_prerequisite_Read {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_prerequisite_Update {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_prerequisite_Delete {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_id {
+  create: QuestionSetFields_questionSet_questionSet_id_Create
+  read: QuestionSetFields_questionSet_questionSet_id_Read
+  update: QuestionSetFields_questionSet_questionSet_id_Update
+  delete: QuestionSetFields_questionSet_questionSet_id_Delete
+}
+
+type QuestionSetFields_questionSet_questionSet_id_Create {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_id_Read {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_id_Update {
+  permission: Boolean!
+}
+
+type QuestionSetFields_questionSet_questionSet_id_Delete {
   permission: Boolean!
 }
 
@@ -9742,20 +9939,44 @@ enum CaseStudyUpdate__status_MutationInput {
 }
 
 input mutationQuestionSetInput {
-  cards: [mutationQuestionSet_CardsInput]
+  QuestionSetTitle: String
+  questionSet: mutationQuestionSet_QuestionSetInput
 }
 
-input mutationQuestionSet_CardsInput {
-  question: String
+input mutationQuestionSet_QuestionSetInput {
+  questionSet: [mutationQuestionSet_QuestionSet_QuestionSetInput]
+}
+
+input mutationQuestionSet_QuestionSet_QuestionSetInput {
+  question: String!
+  answers: [mutationQuestionSet_QuestionSet_QuestionSet_AnswersInput!]
+  prerequisite: String
+  id: String
+}
+
+input mutationQuestionSet_QuestionSet_QuestionSet_AnswersInput {
+  answer: String
   id: String
 }
 
 input mutationQuestionSetUpdateInput {
-  cards: [mutationQuestionSetUpdate_CardsInput]
+  QuestionSetTitle: String
+  questionSet: mutationQuestionSetUpdate_QuestionSetInput
 }
 
-input mutationQuestionSetUpdate_CardsInput {
-  question: String
+input mutationQuestionSetUpdate_QuestionSetInput {
+  questionSet: [mutationQuestionSetUpdate_QuestionSet_QuestionSetInput]
+}
+
+input mutationQuestionSetUpdate_QuestionSet_QuestionSetInput {
+  question: String!
+  answers: [mutationQuestionSetUpdate_QuestionSet_QuestionSet_AnswersInput!]
+  prerequisite: String
+  id: String
+}
+
+input mutationQuestionSetUpdate_QuestionSet_QuestionSet_AnswersInput {
+  answer: String
   id: String
 }
 
